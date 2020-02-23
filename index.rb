@@ -1,33 +1,41 @@
 require 'sinatra/base'
 require_relative './api/oauth'
+require_relative './api/github'
 require 'dotenv'
 require_relative './lib/jwt'
 require 'octokit'
 require 'oauth2'
 require_relative 'db/entity'
 require 'sinatra/cookies'
+require 'sinatra/json'
 Dotenv.load
 
 class PickledServer < Sinatra::Base
   helpers Sinatra::Cookies
+  helpers Sinatra::JSON
   register Pickled::OauthRoutes
+  register Pickled::MeRoutes
   enable :sessions
 
-  get '/' do 
-    pp Entity.sessions.all
+  Octokit.configure do |c|
+    c.auto_paginate = true
+  end
 
-    session_id = cookies[:session]
-    session_entity = Entity.sessions[session_id] if session_id
 
-    unless session_id && session_entity
-      client = PickledAuth.get_client
-      redirect_url = client.auth_code.authorize_url
-      redirect redirect_url
-    else
-      client = Octokit::Client.new(access_token: session_entity.access_token)
-      repos = client.repositories
-      "#{repos.map(&:name).join('<br>')}"
+  helpers do
+    def protected!
+      @session_id = cookies[:session]
+      if @session_id
+        @session_entity = Entity.sessions[@session_id]
+      end
+      unless @session_id && @session_entity
+        halt 401, "Not authorized"
+      end
     end
+  end
+
+  get '/' do 
+    erb :index
   end
 
   run! if app_file == $0

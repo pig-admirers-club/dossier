@@ -1,0 +1,275 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Almarai&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/fefc3e4af0.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.3.2/css/uikit.min.css" rel="stylesheet">
+
+    <style>
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Almarai', sans-serif;
+      }
+      #top-nav {
+        height: 50px;
+        width: 100%;
+        background-color: black;
+      }
+      #container {
+        height: calc(100vh - 50px);
+        width: 100%;
+        display: flex;
+      }
+      #left-nav {
+        height: 100%;
+        width: 50px;
+        background-color: #ebebeb;
+      }
+      #left-nav-ul {
+        height: 100%;
+      }
+      #left-nav ul li {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #left-nav ul, #repo-list ul, .edit-report-menu ul{
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      #repo-list li {
+        display: flex;
+        align-items: center;
+      }
+      #repo-list li, .edit-report-menu li {
+        height: 30px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        font-style:italic;
+        font-weight: 100;
+        border-bottom: 1px solid #ccc;
+      }
+      #repo-list h3, #repo-edit h3 {
+        padding: 15px 0px;
+        margin: 0;
+        font-size: 20px;
+        display: flex;
+        font-style:italic;
+        justify-content: center;
+      }
+      .report-title {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid #ccc;
+
+      }
+      #repo-container {
+        background-color: beige;
+        height: 100%;
+        display: flex;
+      }
+      #repo-list {
+        width: 600px;
+        max-width: 600px;
+        min-height: 100%;
+        border-right: 1px solid #ccc;
+      }
+      #repo-edit {
+        background-color: white;
+        height: 100%;
+        width: calc(100% - 600px);
+      }
+      .repo-edit-body {
+        display: flex;
+        height: calc(100% - 51px);
+      }
+      .edit-report-menu {
+        width: 300px;
+        background-color: blanchedalmond;
+        height: 100%;
+        border-right: 1px solid #ccc;
+      }
+      .edit-report-menu ul li {
+        display: flex;
+        justify-content: space-between;
+      }
+      .edit-report-container {
+        height: 100%;
+        width: calc(100% - 301px);
+      }
+      .edit-report-form {
+        height: calc(100% - 100px);
+        display: flex;
+        justify-content: center;
+      }
+      .edit-report-buttons {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content:space-around;
+        background-color: #ccc;
+      }
+      .icon {
+        height: 100%;
+      }
+      form div {
+        margin-bottom: 10px;
+      }
+      @media screen and (max-width: 1200px) {
+        #repo-list {
+          width: 300px;
+        }
+        #repo-edit {
+          width: 100%;
+        }
+      }
+
+     /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 22px;
+  margin-right: 10px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 2px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(15px);
+  -ms-transform: translateX(15px);
+  transform: translateX(15px);
+}
+    </style>
+  </head>
+  <body>
+    <header id="top-nav" style="display: flex;justify-content: center;align-items: center;">
+      <h4 style="color: white;margin: 0; padding: 0;">Dossier</h4>
+    </header> 
+    <div id="container">
+      <div id="left-nav">
+        <ul>
+          <li><i class="fas fa-box"></i></li>
+        </ul>
+      </div>
+      <div id="repo-container">
+        <div id="repo-list">
+          <div class="report-title">
+            <h3>REPOSITORIES</h3>
+
+          </div>
+          <ul>
+            <li>
+              <div>
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <span style="font-weight: bold;font-style:normal; text-transform: uppercase;">
+                Skinnyjames /
+              </span> 
+              gilded-rose
+            </li>
+            <li>
+              <div class="toggle">
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div>
+                <span style="font-weight: bold;font-style: normal; text-transform: uppercase;">
+                  Skinnyjames /
+                </span>
+                 dgs-internet-servicing-policy</li>
+              </div>
+          </ul>
+        </div>
+        <div id="repo-edit">
+          <div class="report-title">
+            <h3 style="display: flex;justify-content: center;">REPORTS</h3>
+          </div>
+          <div class="repo-edit-body">
+            <div class="edit-report-menu">
+              <ul>
+                <li><span>Gilded Rose Automation</span> <span class="icons"><a><i class="fas fa-cog"></i></a></span></li>
+                <li><span>Gilded Rose Unit Tests</span> <span class="icons"><a><i class="fas fa-cog"></i></a></span></li>
+              </ul>
+            </div>
+            <div class="edit-report-container">
+              <div class="edit-report-form" style="padding: 20px;">
+                <form class="uk-form-stacked">
+                  <div>
+                    <label class="uk-form-label">What is the name of your test suite?</label>
+                    <div class="uk-form-control">
+                      <input class="uk-input uk-width-1-1">
+                    </div>
+                  </div>
+                  <div class="uk-width">
+                    <label class="uk-form-label">What language / framework are your tests written in?</label>
+                    <div class="uk-form-control">
+                      <select class="uk-select uk-width-1-1">
+                        <option>Ruby & Cucumber</option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="edit-report-buttons">
+                <button class='uk-button uk-button-danger'>Delete</button>
+                <button class="uk-button uk-button-primary">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
