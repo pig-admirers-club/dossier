@@ -3,12 +3,13 @@
     <title>Hello</title>
     <link href="https://fonts.googleapis.com/css?family=Almarai&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/fefc3e4af0.js" crossorigin="anonymous"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.3.2/css/uikit.min.css" rel="stylesheet">
     <link href="prism.css" rel="stylesheet">
   </head>
   <body>
     <div id="app"></div>
-    <script src="prism.js"></script>
-    <script src="pickled.js"></script>
+    <script src="/cucumber-reports.js"></script>
+    <script>
+      DossierRubyCucumber(<%= report.to_json %>)
+    </script>
   </body>
 </html>

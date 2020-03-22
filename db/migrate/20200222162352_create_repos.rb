@@ -5,7 +5,6 @@ ROM::SQL.migration do
     create_table :repos do
       primary_key :id
       column :type, String, null: false
-      column :active, TrueClass, default: false, null: false
       column :owner, String, null: false
       column :name, String, null: false
       column :url, String, null: false

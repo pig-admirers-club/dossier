@@ -2,7 +2,7 @@ require 'openssl'
 require 'jwt'
 require 'oauth2'
 
-class PickledAuth
+class DossierAuth
   def self.get_token(code)
     client = self.get_client
     client.auth_code.get_token(code)
