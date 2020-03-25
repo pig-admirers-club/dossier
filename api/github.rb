@@ -50,8 +50,6 @@ module Dossier
       app.post "/api/dossier/:token" do 
         token = params[:token]
         payload = JSON.parse(request.body.read, symbolize_names: true)
-        puts "TOken #{token}"
-        puts "Payload #{payload}"
         id = Entity.report_datas.create(token, payload)
         json id.to_json
       end
