@@ -33,10 +33,7 @@ class Entity
 
     def create_report(payload, user_id) 
       repo_id = payload[:repo_id]
-      puts "REPO #{repo_id}"
-      puts "USER: #{user_id}"
       belongs = repos.belong_to_user(repo_id, user_id)
-      puts "BELONGS #{belongs}"
       unless belongs.nil?
         reports.create(payload)
       else
