@@ -5,6 +5,8 @@ Dotenv.load
 
 namespace :db do 
   task :setup do
-    ROM::SQL::RakeSupport.env = ROM.container(:sql, ENV['pg_dsn'])
+    dsn = (ENV['test'].eql? 'true') ? ENV['pg_test_dsn'] : ENV['pg_dsn']
+    ROM::SQL::RakeSupport.env = ROM.container(:sql, dsn)
   end
 end
+

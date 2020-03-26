@@ -13,4 +13,9 @@ gem 'sinatra-contrib'
 group :development do
   gem 'rerun'
   gem 'foreman'
+  gem 'cucumber'
+  gem 'page-object'
+  gem 'rspec'
+  gem 'watir'
+  gem 'watir-scroll'
 end
