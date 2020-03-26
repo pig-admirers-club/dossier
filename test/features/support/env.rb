@@ -17,6 +17,8 @@ ENV['test'] = 'true'
 
 Before do
   @browser = browser
+  DossierData.populate_repos
+  @session = DossierData.populate_session
 end
 
 at_exit do 
