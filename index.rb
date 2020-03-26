@@ -19,6 +19,8 @@ class DossierServer < Sinatra::Base
 
   Octokit.configure do |c|
     c.auto_paginate = true
+    c.api_endpoint = ENV['GITHUB_API_URL'] if ENV['GITHUB_API_URL']
+    c.web_endpoint = ENV['GITHUB_WEB_URL'] if ENV['GITHUB_WEB_URL']
   end
 
 

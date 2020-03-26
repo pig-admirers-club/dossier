@@ -44,7 +44,7 @@ class Entity
     def sync_repos(user_id, type="GITHUB")
       user = users.find_by_id(user_id)
       client = Octokit::Client.new(access_token: user[:access_token])
-      repositories = client.repositories
+      repositories = client.repositories({}, query: { affiliation: 'owner, collaborator' })
       repos_to_sync = repositories.map do |repo| 
         { 
           owner: repo.owner.login,
@@ -56,7 +56,6 @@ class Entity
       end
 
       ids = self.repos.sync(repos_to_sync)
-      pp ids
       sync_user_repos = ids.map do |id|
         { user_id: user[:id], repo_id: id }
       end

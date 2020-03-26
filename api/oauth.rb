@@ -6,18 +6,18 @@ module Dossier
   module OauthRoutes
     def self.registered(app)
       app.get "/api/oauth/start" do 
-        client = DossierAuth.get_client
-        redirect_url = client.auth_code.authorize_url
+        redirect_url = DossierAuth.get_client_url
         redirect redirect_url
       end
 
       app.get "/api/oauth/callback" do 
         code = request.env['rack.request.query_hash']['code']
-        token = DossierAuth.get_token(code).token
-        client = Octokit::Client.new(access_token: token)
+        token = Octokit.exchange_code_for_token(code, ENV['GITHUB_CLIENT_ID'], ENV['GITHUB_CLIENT_SECRET'])
+        client = Octokit::Client.new(access_token: token[:access_token])
+        puts client.inspect
         payload = { 
           login: client.user.login,
-          token: token
+          token: token[:access_token]
         }
         user = Entity.users.find_or_create(payload)
 
