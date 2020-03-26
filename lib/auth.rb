@@ -3,19 +3,9 @@ require 'jwt'
 require 'oauth2'
 
 class DossierAuth
-  def self.get_token(code)
-    client = self.get_client
-    client.auth_code.get_token(code)
-  end
-
-  def self.get_client
-    opts = {
-      site: 'https://www.github.com',
-      authorize_url: 'login/oauth/authorize',
-      token_url: 'login/oauth/access_token'
-    }
-
-    OAuth2::Client.new(ENV['client_id'], ENV['client_secret'], opts)
+  def self.get_client_url
+    client = Octokit::Client.new
+    client.authorize_url(ENV['GITHUB_CLIENT_ID'], scope: 'repo, read:org')
   end
 
   def self.get_jwt
