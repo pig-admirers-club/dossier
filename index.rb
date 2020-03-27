@@ -10,7 +10,13 @@ require 'sinatra/cookies'
 require 'sinatra/json'
 Dotenv.load
 
+if Rack::Utils.respond_to?("key_space_limit=")
+  Rack::Utils.key_space_limit = 9999999999999999
+end
+
 class DossierServer < Sinatra::Base
+  set :bind, '0.0.0.0'
+
   helpers Sinatra::Cookies
   helpers Sinatra::JSON
   register Dossier::OauthRoutes
