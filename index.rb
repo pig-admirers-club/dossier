@@ -31,20 +31,22 @@ class DossierServer < Sinatra::Base
 
 
   helpers do
-    def protected!
+    def logged_in?
       @session_id = cookies[:session]
       if @session_id
         @session_entity = Entity.sessions.get(@session_id)
         puts @session_entity.inspect
       end
-      unless @session_id && @session_entity
-        halt 401, "Not authorized"
-      end
+      @session_id && @session_entity
+    end
+
+    def protected!
+      halt 401, "Not authorized" unless logged_in?
     end
   end
 
-  get '/' do 
-    erb :index
+  get '/' do
+    erb (logged_in? ? :index : :splash)
   end
 
   get '/ruby-cucumber/:id' do 
