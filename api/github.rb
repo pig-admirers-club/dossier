@@ -2,7 +2,6 @@ require_relative '../db/entity'
 require 'octokit'
 require 'json'
 require_relative '../db/sequel/repos'
-
 module Dossier
   module MeRoutes
     def self.registered(app)
@@ -27,8 +26,12 @@ module Dossier
       app.post "/api/me/reports/new" do 
         protected!
         body = JSON.parse(request.body.read, symbolize_names: true)
-        puts body.inspect
-        id = Entity.create_report(body, @session_entity[:user_id])
+        begin
+          id = Entity.create_report(body, @session_entity[:user_id])
+        rescue Dossier::ValidationError => e
+          halt 400, json(e.errors.to_json)
+        end
+
         if id
           json ({ id: id }).to_json
         else

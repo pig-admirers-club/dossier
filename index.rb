@@ -41,7 +41,7 @@ class DossierServer < Sinatra::Base
     end
 
     def protected!
-      halt 401, "Not authorized" unless logged_in?
+      halt(401, "Not authorized") unless !!logged_in?
     end
   end
 
