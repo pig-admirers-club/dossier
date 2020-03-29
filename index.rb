@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require_relative './api/oauth'
 require_relative './api/github'
+require_relative './api/reports'
 require 'dotenv'
 require_relative './lib/auth'
 require 'octokit'
@@ -21,6 +22,7 @@ class DossierServer < Sinatra::Base
   helpers Sinatra::JSON
   register Dossier::OauthRoutes
   register Dossier::MeRoutes
+  register Dossier::ReportRoutes
   enable :sessions
 
   Octokit.configure do |c|
@@ -52,18 +54,6 @@ class DossierServer < Sinatra::Base
   get '/ruby-cucumber/:id' do 
     report = Entity.reports.get_with_repo_by_id(params[:id])
     erb :ruby_cucumber, locals: { report: report }
-  end
-
-  get '/api/dossier/:report_id' do
-    reports = Entity.report_datas.get_all(params[:report_id]).map do |data|
-      { 
-        uuid: data[:id],
-        features: JSON.parse(data[:data]),
-        date: data[:created]
-      }
-    end
-
-    json reports.to_json
   end
 
   run! if app_file == $0

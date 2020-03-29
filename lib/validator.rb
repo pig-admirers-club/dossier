@@ -57,7 +57,6 @@ module Dossier
       if errors.length > 0
         errs = JSON.parse(errors.to_json)
         @errors = []
-        puts @errors, errs
         raise ValidationError.new(errs)
       end
     end

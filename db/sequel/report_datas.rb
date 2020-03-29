@@ -3,8 +3,8 @@ require_relative 'db'
 class ReportDatas
   class << self
 
-    def get_all(report_id) 
-      Database.resource['select * from report_datas where report_id = ?', report_id].all
+    def get_all(query) 
+      Database.resource['select * from report_datas where report_id = :id order by created desc limit :per_page offset :offset', query].all
     end
 
     def create(token, data)
