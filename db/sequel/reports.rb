@@ -16,6 +16,15 @@ class Reports
   })
 
   class << self
+
+    def count(id)
+      sql = <<-END
+        select count(rd.id) from reports as r 
+        inner join report_datas as rd on rd.report_id = r.id 
+        where r.id = ?
+      END
+      Database.resource[sql, id].first
+    end
     def get_with_repo_by_id(report_id)
       sql = <<-END
         select rp.id, rp.name, rp.framework, re.type, re.owner, re.name as repo_name, re.url from reports as rp
