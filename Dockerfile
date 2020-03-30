@@ -8,5 +8,5 @@ RUN bundle install
 
 EXPOSE 4567
 
-CMD ruby index.rb -o 0.0.0.0
+CMD ruby index.rb -s Puma --o 0.0.0.0
 ENTRYPOINT ["bundle", "exec"]
